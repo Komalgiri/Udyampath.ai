@@ -1,5 +1,8 @@
 # UdyAmPath 🚀 
 
+<div align="center">
+  <img src="./public/readme_img/udyampath.png" alt="UdyAmPath Logo" width="100%" />
+</div>
 Welcome to **UdyAmPath**, the ultimate AI-driven career and placement platform designed to bridge the gap between students, educators, and recruiters.
 
 ---
@@ -43,17 +46,23 @@ To empower students with the right skills, resources, and connections to land th
 - **My Learnings Dashboard**: A dedicated dashboard for users to track their enrolled courses, progress percentages, and last accessed dates.
 - **Specializations & Pathways**: Curated learning tracks for different career goals (e.g., Frontend Developer, Data Scientist).
 
+<img src="./public/readme_img/UI_12.png" alt="Course Management Preview" width="100%" />
+
 ### 2. 💼 Job & Internship Portal
 - **Job Listings**: Real-time updates on available jobs and internships.
 - **One-Click Apply**: Seamless application process directly from the platform.
 - **Job Simulator**: An innovative feature allowing users to simulate day-to-day tasks of specific job roles.
 - **Resume Checker**: Automated resume analysis to ensure candidates meet industry standards.
 
+<img src="./public/readme_img/UI_13.png" alt="Job Portal Preview" width="100%" />
+
 ### 3. 🛠️ Placement Preparation Tools
 - **Mock Interviews (Tech & HR)**: Practice interviews with AI-generated feedback.
 - **Group Discussion Rooms**: Virtual spaces for candidates to practice GD skills.
 - **Placement Papers & Pyqs**: A vast repository of previous year questions and placement papers from top companies.
 - **Adaptability & Communication Tests**: Assess and improve soft skills essential for modern workplaces.
+
+<img src="./public/readme_img/UI_14.png" alt="Placement Preparation Tools Preview" width="100%" />
 
 ### 4. 📝 Notes & Flashcards
 - **Digital Library**: Access to e-books, notes, and study materials.
@@ -106,47 +115,6 @@ graph TD;
     end
     
     A --> FrontendFeatures;
-```
-
-### Authentication & Authorization Flow
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant C as React Client
-    participant FA as Firebase Auth
-    participant DB as Firebase Realtime DB
-
-    U->>C: Enter Credentials (Login/Signup)
-    C->>FA: Authenticate User
-    FA-->>C: Return Auth Token & UID
-    C->>DB: Query `users/${uid}` for Role
-    DB-->>C: Return `userType` (student/recruiter)
-    alt is Student
-        C->>U: Redirect to Homepage / Dashboard
-    else is Recruiter
-        C->>U: Redirect to Recruiter Dashboard
-    end
-```
-
-### User Journey (Student vs. Recruiter)
-```mermaid
-journey
-    title Student Journey
-    section Learning
-      Enroll in Course: 5: Student
-      Complete Modules: 4: Student
-      Review Flashcards: 4: Student
-    section Preparation
-      Take Mock Interview: 5: Student
-      Resume Check: 3: Student
-    section Placement
-      Apply for Job: 5: Student
-
-    title Recruiter Journey
-    section Hiring
-      Post Job Opening: 5: Recruiter
-      Review Applications: 4: Recruiter
-      Shortlist Candidates: 4: Recruiter
 ```
 
 ---
@@ -293,6 +261,25 @@ A specialized view accessible only to users with the 'recruiter' role. Allows fo
    - Students are directed to the Homepage/Dashboard.
    - Recruiters are directed to the Recruiter Dashboard via the `RecruiterRoute` component.
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as React Client
+    participant FA as Firebase Auth
+    participant DB as Firebase Realtime DB
+
+    U->>C: Enter Credentials (Login/Signup)
+    C->>FA: Authenticate User
+    FA-->>C: Return Auth Token & UID
+    C->>DB: Query `users/${uid}` for Role
+    DB-->>C: Return `userType` (student/recruiter)
+    alt is Student
+        C->>U: Redirect to Homepage / Dashboard
+    else is Recruiter
+        C->>U: Redirect to Recruiter Dashboard
+    end
+```
+
 ---
 
 ## 🛡️ Roles & Permissions
@@ -301,6 +288,27 @@ The application uses custom wrapper components for route protection in `App.js`:
 
 - **`ProtectedRoute`**: Ensures the user is logged in. Unauthenticated users are redirected to the homepage.
 - **`RecruiterRoute`**: Ensures the user is logged in AND has the `userType` of 'recruiter'. Protects sensitive hiring tools.
+
+### User Journey (Student vs. Recruiter)
+```mermaid
+journey
+    title Student Journey
+    section Learning
+      Enroll in Course: 5: Student
+      Complete Modules: 4: Student
+      Review Flashcards: 4: Student
+    section Preparation
+      Take Mock Interview: 5: Student
+      Resume Check: 3: Student
+    section Placement
+      Apply for Job: 5: Student
+
+    title Recruiter Journey
+    section Hiring
+      Post Job Opening: 5: Recruiter
+      Review Applications: 4: Recruiter
+      Shortlist Candidates: 4: Recruiter
+```
 
 ---
 
