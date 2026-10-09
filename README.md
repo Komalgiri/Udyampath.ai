@@ -3,8 +3,15 @@
 <div align="center">
   <img src="./public/readme_img/udyampath.png" alt="UdyAmPath Logo" width="100%" />
 </div>
-Welcome to **UdyAmPath**, the ultimate AI-driven career and placement platform designed to bridge the gap between students, educators, and recruiters.
+<br />
 
+<p align="center">
+  <i>
+    ✨ <b>UdyAmPath</b> is the definitive AI-powered career ecosystem, intelligently engineered to seamlessly bridge the gap between ambitious students, dedicated educators, and visionary recruiters. ✨
+  </i>
+</p>
+
+<br />
 ---
 
 ## 📖 Table of Contents
