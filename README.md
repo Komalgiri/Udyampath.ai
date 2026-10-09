@@ -98,14 +98,55 @@ graph TD;
     A -->|Auth Request| C(Firebase Auth);
     A -->|Read/Write Data| D(Firebase Realtime DB);
     
-    subgraph Frontend Features
+    subgraph FrontendFeatures ["Frontend Features"]
     F1[Course Modules]
     F2[Job Board]
     F3[Mock Interviews]
     F4[User Dashboard]
     end
     
-    A --> Frontend Features;
+    A --> FrontendFeatures;
+```
+
+### Authentication & Authorization Flow
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant C as React Client
+    participant FA as Firebase Auth
+    participant DB as Firebase Realtime DB
+
+    U->>C: Enter Credentials (Login/Signup)
+    C->>FA: Authenticate User
+    FA-->>C: Return Auth Token & UID
+    C->>DB: Query `users/${uid}` for Role
+    DB-->>C: Return `userType` (student/recruiter)
+    alt is Student
+        C->>U: Redirect to Homepage / Dashboard
+    else is Recruiter
+        C->>U: Redirect to Recruiter Dashboard
+    end
+```
+
+### User Journey (Student vs. Recruiter)
+```mermaid
+journey
+    title Student Journey
+    section Learning
+      Enroll in Course: 5: Student
+      Complete Modules: 4: Student
+      Review Flashcards: 4: Student
+    section Preparation
+      Take Mock Interview: 5: Student
+      Resume Check: 3: Student
+    section Placement
+      Apply for Job: 5: Student
+
+    title Recruiter Journey
+    section Hiring
+      Post Job Opening: 5: Recruiter
+      Review Applications: 4: Recruiter
+      Shortlist Candidates: 4: Recruiter
 ```
 
 ---
@@ -310,10 +351,10 @@ Please ensure your code adheres to the existing ESLint configuration and include
 
 ## 👥 Collaborators & Team
 
-- **Komal Giri** - Project Lead & Developer
-- **[@princliv](https://github.com/princliv)** - Collaborator & Contributor
+- **Komal Giri** - Project Lead & Developer (Equally Contributed)
+- **Ankit [@princliv](https://github.com/princliv)** - Project Lead & Developer (Equally Contributed)
 
-We are actively looking for more contributors to help build the future of education and placement!
+We both are equally dedicated to this project and actively developing it. We are also looking for more open-source contributors to help build the future of education and placement!
 
 ---
 
