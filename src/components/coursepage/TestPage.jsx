@@ -31,6 +31,7 @@ const TestPage = () => {
   const [fullscreenMode, setFullscreenMode] = useState(false);
   const [testStarted, setTestStarted] = useState(false);
   const [blockLeave, setBlockLeave] = useState(false);
+  const [modelsLoaded, setModelsLoaded] = useState(false);
 
   // Block leaving the test page
   useEffect(() => {
@@ -45,13 +46,43 @@ const TestPage = () => {
     }
   }, [blockLeave]);
 
+<<<<<<< Updated upstream
+=======
+  // Load face detection models
+  useEffect(() => {
+    const loadModels = async () => {
+      try {
+        await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
+        console.log("Face detection models loaded");
+        setModelsLoaded(true);
+      } catch (error) {
+        console.error("Error loading face detection models:", error);
+        setModelsLoaded(false);
+      }
+    };
+    loadModels();
+  }, []);
+
+>>>>>>> Stashed changes
   // Handle camera stream
   const startVideo = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
       streamRef.current = stream;
-      if (videoRefPreview.current) videoRefPreview.current.srcObject = stream;
-      if (videoRefSmall.current) videoRefSmall.current.srcObject = stream;
+      if (videoRefPreview.current) {
+        videoRefPreview.current.srcObject = stream;
+        // Wait for video to be ready
+        videoRefPreview.current.onloadedmetadata = () => {
+          console.log("Preview video ready");
+        };
+      }
+      if (videoRefSmall.current) {
+        videoRefSmall.current.srcObject = stream;
+        // Wait for video to be ready
+        videoRefSmall.current.onloadedmetadata = () => {
+          console.log("Small video ready");
+        };
+      }
       console.log("Camera started successfully");
     } catch (error) {
       console.error("Error accessing camera:", error);
@@ -75,9 +106,12 @@ const TestPage = () => {
 
   // Face detection
   const detectFace = useCallback(async () => {
+    if (!modelsLoaded) return; // Don't detect if models aren't loaded yet
+    
     const video = showTest ? videoRefSmall.current : videoRefPreview.current;
-    if (video && cameraEnabled) {
+    if (video && cameraEnabled && video.readyState === 4) { // readyState 4 = HAVE_ENOUGH_DATA
       try {
+<<<<<<< Updated upstream
         if ("FaceDetector" in window) {
           const detector = new window.FaceDetector({ fastMode: true, maxDetectedFaces: 1 });
           const detections = await detector.detect(video);
@@ -85,6 +119,12 @@ const TestPage = () => {
         } else {
           // Fallback for browsers without native FaceDetector support.
           setFaceDetected(true);
+=======
+        // Check if video has valid dimensions
+        if (video.videoWidth > 0 && video.videoHeight > 0) {
+          const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions());
+          setFaceDetected(detections.length > 0);
+>>>>>>> Stashed changes
         }
       } catch (error) {
         console.error("Face detection error:", error);
@@ -93,7 +133,7 @@ const TestPage = () => {
     } else {
       setFaceDetected(false);
     }
-  }, [cameraEnabled, showTest]);
+  }, [cameraEnabled, showTest, modelsLoaded]);
 
   useEffect(() => {
     const interval = setInterval(detectFace, 1000);

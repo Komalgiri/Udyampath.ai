@@ -153,7 +153,7 @@ const MyLearningsPage = () => {
                 }}>
                   {course.title}
                 </h3>
-                <button 
+                <motion.button 
                   onClick={() => removeCourse(course.id)}
                   style={{
                     backgroundColor: "transparent",
@@ -161,13 +161,11 @@ const MyLearningsPage = () => {
                     color: "#999",
                     cursor: "pointer",
                     fontSize: "14px",
-                    ":hover": {
-                      color: "#ff4444"
-                    }
                   }}
+                  whileHover={{ color: "#ff4444" }}
                 >
                   Remove
-                </button>
+                </motion.button>
               </div>
               
               <div style={{ marginBottom: "15px" }}>
@@ -212,7 +210,7 @@ const MyLearningsPage = () => {
                   Last accessed: {new Date(course.lastAccessed).toLocaleDateString()}
                 </span>
                 <div>
-                  <button 
+                  <motion.button 
                     onClick={() => updateProgress(course.id, course.progress - 10)}
                     disabled={course.progress <= 0}
                     style={{
@@ -221,16 +219,13 @@ const MyLearningsPage = () => {
                       border: "none",
                       borderRadius: "4px",
                       marginRight: "8px",
-                      cursor: "pointer",
-                      ":disabled": {
-                        opacity: 0.5,
-                        cursor: "not-allowed"
-                      }
+                      cursor: course.progress <= 0 ? "not-allowed" : "pointer",
+                      opacity: course.progress <= 0 ? 0.5 : 1
                     }}
                   >
                     -
-                  </button>
-                  <button 
+                  </motion.button>
+                  <motion.button 
                     onClick={() => updateProgress(course.id, course.progress + 10)}
                     disabled={course.progress >= 100}
                     style={{
@@ -238,19 +233,16 @@ const MyLearningsPage = () => {
                       backgroundColor: "#f0f0f0",
                       border: "none",
                       borderRadius: "4px",
-                      cursor: "pointer",
-                      ":disabled": {
-                        opacity: 0.5,
-                        cursor: "not-allowed"
-                      }
+                      cursor: course.progress >= 100 ? "not-allowed" : "pointer",
+                      opacity: course.progress >= 100 ? 0.5 : 1
                     }}
                   >
                     +
-                  </button>
+                  </motion.button>
                 </div>
               </div>
               
-              <button 
+              <motion.button 
                 style={{
                   width: "100%",
                   padding: "10px",
@@ -260,16 +252,13 @@ const MyLearningsPage = () => {
                   border: "none",
                   borderRadius: "6px",
                   cursor: "pointer",
-                  fontWeight: "500",
-                  transition: "all 0.2s",
-                  ":hover": {
-                    backgroundColor: "#003b8e"
-                  }
+                  fontWeight: "500"
                 }}
+                whileHover={{ backgroundColor: "#003b8e" }}
               >
                 {course.progress === 0 ? "Start Learning" : 
                  course.progress === 100 ? "Completed! Review Course" : "Continue Learning"}
-              </button>
+              </motion.button>
             </GlassCard>
             </motion.div>
           ))}
