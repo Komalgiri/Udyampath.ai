@@ -19,7 +19,7 @@ If you discover a security vulnerability in UdyAmPath, please **do not** report 
 
 Instead, please report it to the core team by reaching out directly to the maintainers:
 - **Komal Giri** (via GitHub profile)
-- **Ankit** (via GitHub profile)
+- **Ankit Kumar** (via GitHub profile)
 
 When reporting a vulnerability, please include the following details:
 1. **Description**: A clear summary of the vulnerability.

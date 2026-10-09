@@ -367,7 +367,7 @@ Please ensure your code adheres to the existing ESLint configuration and include
 ## 👥 Collaborators & Team
 
 - **Komal Giri** - Project Lead & Developer (Equally Contributed)
-- **Ankit [@princliv](https://github.com/princliv)** - Project Lead & Developer (Equally Contributed)
+- **Ankit Kumar [@princliv](https://github.com/princliv)** - Project Lead & Developer (Equally Contributed)
 
 We both are equally dedicated to this project and actively developing it. We are also looking for more open-source contributors to help build the future of education and placement!
 
